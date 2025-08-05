@@ -1,5 +1,5 @@
 {% set name = "scramp" %}
-{% set version = "1.4.0" %}
+{% set version = "1.4.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,34 +7,46 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d27d768408c6fc025a0e567eed84325b0aaf24364c81ea5974e8334ae3c4fda3
+  sha256: fe055ebbebf4397b9cb323fcc4b299f219cd1b03fd673ca40c97db04ac7d107e
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
-  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: True  # [py<38]
 
 requirements:
   host:
-    - python >3.5
     - pip
+    - python
+    - hatchling
   run:
-    - python >3.5
-    - asn1crypto ==1.4.0
+    - python
+    - asn1crypto >=1.5.1
 
 test:
+  source_files:
+    - test/test_scramp.py
   imports:
     - scramp
+  commands:
+    - pip check
+    - pytest -v test/test_scramp.py
+  requires:
+    - pip
+    - pytest
+    - pytest-mock
 
 about:
   home: https://github.com/tlocke/scramp
+  summary: A pure-Python implementation of the SCRAM authentication protocol
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: A pure-Python implementation of the SCRAM authentication protocol
   description: |
     A Python implementation of the SCRAM authentication protocol defined by
     RFC 5802 and RFC 7677.
+  dev_url: https://github.com/tlocke/scramp
+  doc_url: https://github.com/tlocke/scramp/blob/main/README.md
 
 extra:
   recipe-maintainers:
