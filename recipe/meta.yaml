@@ -1,18 +1,18 @@
 {% set name = "scramp" %}
-{% set version = "1.4.6" %}
+{% set version = "1.4.8" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: fe055ebbebf4397b9cb323fcc4b299f219cd1b03fd673ca40c97db04ac7d107e
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: bd018fabfe46343cceeb9f1c3e8d23f55770271e777e3accbfaee3ff0a316e71
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: True  # [py<38]
+  skip: true  # [py<38]
 
 requirements:
   host:
