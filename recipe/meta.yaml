@@ -2,11 +2,11 @@
 {% set version = "1.4.8" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: bd018fabfe46343cceeb9f1c3e8d23f55770271e777e3accbfaee3ff0a316e71
 
 build:
